@@ -1,0 +1,8 @@
+identifier: dcat3
+ontology_file: https://raw.githubusercontent.com/w3c/dxwg/gh-pages/dcat/rdf/dcat3.rdf
+requirements:
+    - dcterms
+    - prov
+    - foaf
+namespaces:
+    dcat3: http://www.w3.org/ns/dcat#

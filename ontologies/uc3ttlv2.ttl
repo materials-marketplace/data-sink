@@ -1,0 +1,525 @@
+@prefix : <http://the-marketplace-project.eu/uc3#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://the-marketplace-project.eu/uc3> .
+
+<http://the-marketplace-project.eu/uc3> rdf:type owl:Ontology ;
+                                         owl:versionIRI <http://the-marketplace-project.eu/uc3/0.0.1> ;
+                                         owl:imports <http://emmo.info/emmo-inferred/1.0.0-beta> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://the-marketplace-project.eu/uc3#EMMO_25ff9b9b_6173_487b_b95e_520b610fd694
+:EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://emmo.info/emmo#EMMO_f68030be_94b8_4c61_a161_886468558054> ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "hasOutputSpatialPart"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526
+:EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://emmo.info/emmo#EMMO_f68030be_94b8_4c61_a161_886468558054> ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "hasInputSpatialPart"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://the-marketplace-project.eu/uc3#EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47
+:EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_71f6ab56_342c_484b_bbe0_de86b7367cb3> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "MassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_04cda6cc_e426_47db_9e80_f868ceba1529
+:EMMO_04cda6cc_e426_47db_9e80_f868ceba1529 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PilotMassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_095b46e2_afb9_416f_9a67_c5ec894abaaf
+:EMMO_095b46e2_afb9_416f_9a67_c5ec894abaaf rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PilotMethaneMassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_10bd5acb_6ba1_43b3_9b24_aa4f85f55f31
+:EMMO_10bd5acb_6ba1_43b3_9b24_aa4f85f55f31 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_bbf85a44_94d8_417a_9b1f_1c175c830952 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "CatalystSupportMacroPorosity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_22f7db5f_6985_477c_8c19_f1aef4d1e292
+:EMMO_22f7db5f_6985_477c_8c19_f1aef4d1e292 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_4456a5d2_16a6_4ee1_9a8e_5c75956b28ea> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_04cda6cc_e426_47db_9e80_f868ceba1529
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_095b46e2_afb9_416f_9a67_c5ec894abaaf
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_323ebe45_5aa1_4cb5_a60b_ab367ad0dfe0
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_403a6dd9_1589_4494_a350_72731f75e8d2
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_65bfd83c_006c_4adb_a2a9_56aa0c1ebe33
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_86a12156_7456_4553_860a_680fec3a5788
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_a082abe3_86f3_408e_b40a_93f4bafe4d97
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_ae37c6e3_dfa4_4728_9f67_b4f7903f59d9
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_ef0eeef1_88d8_4546_841c_871c65ee5e32
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_f346ae7d_4ade_4a96_b9f8_4889dd573287
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_475c6807_e1db_4330_ab3a_51b0b9257242
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_4e473c42_f95c_4051_ad87_9d0e791e5f5e
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_adf671ea_6c5c_4276_9767_d3ae90d8b80b
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_b3d966ce_5d91_476c_8485_e1c111ec6dc7
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_dabd4f13_5980_4015_8a48_c72bada24b36
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_f305baf6_728e_431d_b412_da33c32bf665
+                                                           ] ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "UC3Model1"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_233f6fc2_e567_4d0b_bfe9_c3c06258463f
+:EMMO_233f6fc2_e567_4d0b_bfe9_c3c06258463f rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/Diameter" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L+1 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Diameter"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_26edeee8_fc4d_4817_bf73_819a7fffc5df
+:EMMO_26edeee8_fc4d_4817_bf73_819a7fffc5df rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_71f6ab56_342c_484b_bbe0_de86b7367cb3> ;
+                                           <http://emmo.info/emmo#EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9> "Specific surface area is defined as surface area per mass" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L+2 M-1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "SpecificSurfaceArea"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_28dc054f_67f0_4abd_8ac7_24697213d96a
+:EMMO_28dc054f_67f0_4abd_8ac7_24697213d96a rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/Radius" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L+1 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Radius"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_323ebe45_5aa1_4cb5_a60b_ab367ad0dfe0
+:EMMO_323ebe45_5aa1_4cb5_a60b_ab367ad0dfe0 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_7c055d65_2929_40e1_af4f_4bf10995ad50> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "ATSBMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_388052c2_68a3_45f6_8db8_a7e093af7bd3
+:EMMO_388052c2_68a3_45f6_8db8_a7e093af7bd3 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_a8eb87b5_4d10_4137_a75c_e04ee59ca095> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "ATSBVolumeFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_394a066f_24ce_43d6_88a5_61838f16e4a9
+:EMMO_394a066f_24ce_43d6_88a5_61838f16e4a9 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_28dc054f_67f0_4abd_8ac7_24697213d96a ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/Radius" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L+1 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "MacroPoreAverageRadius"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_3a96b50d_a72b_4dfd_8c7e_ba457c73e7dc
+:EMMO_3a96b50d_a72b_4dfd_8c7e_ba457c73e7dc rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_7e8d9217_20a1_4bff_92a2_afe28cc3fde8 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L-1 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PreCursorViscosity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_3f88161a_cacc_4e88_b757_6930117cd3fa
+:EMMO_3f88161a_cacc_4e88_b757_6930117cd3fa rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_affe07e4_e9bc_4852_86c6_69e26182a17f> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ+1 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Lightoff3Temperature"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_403a6dd9_1589_4494_a350_72731f75e8d2
+:EMMO_403a6dd9_1589_4494_a350_72731f75e8d2 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_0329f1f5_8339_4ce4_8505_a264c6d606ba> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L+1 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PreCursorVelocity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_43fed3d3_4e60_40f1_b645_68b3a5e23468
+:EMMO_43fed3d3_4e60_40f1_b645_68b3a5e23468 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_ab137fca_03d1_4495_8d38_6c6caa94ec63 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "MacroporeTortuosity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_475c6807_e1db_4330_ab3a_51b0b9257242
+:EMMO_475c6807_e1db_4330_ab3a_51b0b9257242 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PilotMethaneVolumeFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_4e473c42_f95c_4051_ad87_9d0e791e5f5e
+:EMMO_4e473c42_f95c_4051_ad87_9d0e791e5f5e rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "DispersionVolumeFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_65bfd83c_006c_4adb_a2a9_56aa0c1ebe33
+:EMMO_65bfd83c_006c_4adb_a2a9_56aa0c1ebe33 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_233f6fc2_e567_4d0b_bfe9_c3c06258463f ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L+1 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "DropletSauterMeanDiameter"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_6ac4d55f_a1e7_4f26_bc47_fb42808bf1ad
+:EMMO_6ac4d55f_a1e7_4f26_bc47_fb42808bf1ad rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_ad738abb_da7f_4260_9d1f_3dd5b6cc1ac2 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Lightoff3MethaneMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_6e5ae524_14a5_4541_8a13_35a73daa3241
+:EMMO_6e5ae524_14a5_4541_8a13_35a73daa3241 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_4456a5d2_16a6_4ee1_9a8e_5c75956b28ea> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_04cda6cc_e426_47db_9e80_f868ceba1529
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_095b46e2_afb9_416f_9a67_c5ec894abaaf
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_323ebe45_5aa1_4cb5_a60b_ab367ad0dfe0
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_403a6dd9_1589_4494_a350_72731f75e8d2
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_65bfd83c_006c_4adb_a2a9_56aa0c1ebe33
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_86a12156_7456_4553_860a_680fec3a5788
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_a082abe3_86f3_408e_b40a_93f4bafe4d97
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_ae37c6e3_dfa4_4728_9f67_b4f7903f59d9
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_ef0eeef1_88d8_4546_841c_871c65ee5e32
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_f346ae7d_4ade_4a96_b9f8_4889dd573287
+                                                           ] ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "UC3Model2"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_6eaa4b85_8811_4829_926b_a055c3434e89
+:EMMO_6eaa4b85_8811_4829_926b_a055c3434e89 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_26edeee8_fc4d_4817_bf73_819a7fffc5df ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L+2 M-1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "ActiveSurfaceArea"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_709834dc_def8_4364_88f4_718786102405
+:EMMO_709834dc_def8_4364_88f4_718786102405 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_7c055d65_2929_40e1_af4f_4bf10995ad50> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "OxygenMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_7407c544_518d_49db_874b_9d33b615f316
+:EMMO_7407c544_518d_49db_874b_9d33b615f316 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_ad738abb_da7f_4260_9d1f_3dd5b6cc1ac2 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Lightoff2MethaneMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_7d40dba1_0ff8_44bd_b909_d698ea11f4cd
+:EMMO_7d40dba1_0ff8_44bd_b909_d698ea11f4cd rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_affe07e4_e9bc_4852_86c6_69e26182a17f> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ+1 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Lightoff1Temperature"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_7e8d9217_20a1_4bff_92a2_afe28cc3fde8
+:EMMO_7e8d9217_20a1_4bff_92a2_afe28cc3fde8 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_71f6ab56_342c_484b_bbe0_de86b7367cb3> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/DynamicViscosity" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L-1 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "DynamicViscosity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_86a12156_7456_4553_860a_680fec3a5788
+:EMMO_86a12156_7456_4553_860a_680fec3a5788 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "FanExtractionMassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_87538e96_74bd_436e_9b59_07ea691ca847
+:EMMO_87538e96_74bd_436e_9b59_07ea691ca847 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_e67c6982_680a_4138_9273_f993ddcdb3d1 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-2 L2 M1 I0 Θ0 N-1 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "ActivationEnergy"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_9a21ae8d_b672_4b30_a9c0_1dc5e86dd585
+:EMMO_9a21ae8d_b672_4b30_a9c0_1dc5e86dd585 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_4456a5d2_16a6_4ee1_9a8e_5c75956b28ea> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_3f88161a_cacc_4e88_b757_6930117cd3fa
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_6ac4d55f_a1e7_4f26_bc47_fb42808bf1ad
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_7407c544_518d_49db_874b_9d33b615f316
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_7d40dba1_0ff8_44bd_b909_d698ea11f4cd
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_a6c5b6f0_73fb_4138_9eac_eaac4769b24e
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_25ff9b9b_6173_487b_b95e_520b610fd694 ;
+                                                             owl:someValuesFrom :EMMO_b2731ef0_dcce_4480_84a0_4335edb7dda6
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_10bd5acb_6ba1_43b3_9b24_aa4f85f55f31
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_394a066f_24ce_43d6_88a5_61838f16e4a9
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_43fed3d3_4e60_40f1_b645_68b3a5e23468
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_6eaa4b85_8811_4829_926b_a055c3434e89
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_87538e96_74bd_436e_9b59_07ea691ca847
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :EMMO_28d50e05_2bac_4935_91e0_6d5aadf3f526 ;
+                                                             owl:someValuesFrom :EMMO_d75e683c_c166_4f63_84bc_7959568ea539
+                                                           ] ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "UC3Model3"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_a082abe3_86f3_408e_b40a_93f4bafe4d97
+:EMMO_a082abe3_86f3_408e_b40a_93f4bafe4d97 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PilotOxygenMassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_a6c5b6f0_73fb_4138_9eac_eaac4769b24e
+:EMMO_a6c5b6f0_73fb_4138_9eac_eaac4769b24e rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_affe07e4_e9bc_4852_86c6_69e26182a17f> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ+1 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Lightoff2Temperature"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_ab137fca_03d1_4495_8d38_6c6caa94ec63
+:EMMO_ab137fca_03d1_4495_8d38_6c6caa94ec63 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_faab3f84_e475_4a46_af9c_7d249f0b9aef> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Tortuosity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_ad738abb_da7f_4260_9d1f_3dd5b6cc1ac2
+:EMMO_ad738abb_da7f_4260_9d1f_3dd5b6cc1ac2 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_7c055d65_2929_40e1_af4f_4bf10995ad50> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "MethaneMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_adf671ea_6c5c_4276_9767_d3ae90d8b80b
+:EMMO_adf671ea_6c5c_4276_9767_d3ae90d8b80b rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_d5be1faf_0c56_4f5a_9b78_581e6dee949f> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L-3 M0 I0 Θ0 N+1 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "ATSBConcentration"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_ae37c6e3_dfa4_4728_9f67_b4f7903f59d9
+:EMMO_ae37c6e3_dfa4_4728_9f67_b4f7903f59d9 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PreCursorMassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_b2731ef0_dcce_4480_84a0_4335edb7dda6
+:EMMO_b2731ef0_dcce_4480_84a0_4335edb7dda6 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_ad738abb_da7f_4260_9d1f_3dd5b6cc1ac2 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Lightoff1MethaneMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_b3d966ce_5d91_476c_8485_e1c111ec6dc7
+:EMMO_b3d966ce_5d91_476c_8485_e1c111ec6dc7 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PilotOxygenVolumeFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_bbf85a44_94d8_417a_9b1f_1c175c830952
+:EMMO_bbf85a44_94d8_417a_9b1f_1c175c830952 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_faab3f84_e475_4a46_af9c_7d249f0b9aef> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "Porosity"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_c196abb1_71ca_4173_a403_1c01532d4caa
+:EMMO_c196abb1_71ca_4173_a403_1c01532d4caa rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_ad738abb_da7f_4260_9d1f_3dd5b6cc1ac2 ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "FlameSprayMethaneMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_d4c953ba_b05d_40e8_bc20_b7054af30291
+:EMMO_d4c953ba_b05d_40e8_bc20_b7054af30291 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PilotVolumeFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_d75e683c_c166_4f63_84bc_7959568ea539
+:EMMO_d75e683c_c166_4f63_84bc_7959568ea539 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_7c055d65_2929_40e1_af4f_4bf10995ad50> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PalladiumMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_dabd4f13_5980_4015_8a48_c72bada24b36
+:EMMO_dabd4f13_5980_4015_8a48_c72bada24b36 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "FanExtractionVolumeFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_e67c6982_680a_4138_9273_f993ddcdb3d1
+:EMMO_e67c6982_680a_4138_9273_f993ddcdb3d1 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_71f6ab56_342c_484b_bbe0_de86b7367cb3> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MolarEnergy" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-2 L2 M1 I0 Θ0 N-1 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "MolarEnergy"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_ef0eeef1_88d8_4546_841c_871c65ee5e32
+:EMMO_ef0eeef1_88d8_4546_841c_871c65ee5e32 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_00f1a13b_2b15_4b1f_abf5_56c207c15f47 ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/MassFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "DispersionMassFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_f305baf6_728e_431d_b412_da33c32bf665
+:EMMO_f305baf6_728e_431d_b412_da33c32bf665 rdf:type owl:Class ;
+                                           rdfs:subClassOf :EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "PreCursorVolumeFlowRate"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_f346ae7d_4ade_4a96_b9f8_4889dd573287
+:EMMO_f346ae7d_4ade_4a96_b9f8_4889dd573287 rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_7c055d65_2929_40e1_af4f_4bf10995ad50> ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T0 L0 M0 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "XyleneMassFraction"@en .
+
+
+###  http://the-marketplace-project.eu/uc3#EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf
+:EMMO_f69f71a1_440a_436b_8e90_0c132cd10adf rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://emmo.info/emmo#EMMO_71f6ab56_342c_484b_bbe0_de86b7367cb3> ;
+                                           <http://emmo.info/emmo#EMMO_1f1b164d_ec6a_4faa_8d5e_88bda62316cc> "http://qudt.org/vocab/quantitykind/VolumeFlowRate" ;
+                                           <http://emmo.info/emmo#EMMO_de178b12_5d35_4bca_8efa_a4193162571d> "T-1 L0 M+1 I0 Θ0 N0 J0" ;
+                                           <http://www.w3.org/2004/02/skos/core#prefLabel> "VolumeFlowRate"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

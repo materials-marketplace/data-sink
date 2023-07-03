@@ -1,0 +1,6 @@
+identifier: mp
+ontology_file: ./marketplace.ttl
+reference_by_label: False
+namespaces:
+    mp: http://osp-core.simphony.eu/cuds/
+format: turtle

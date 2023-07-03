@@ -1,0 +1,333 @@
+---
+version: "0.0.1"
+
+namespace: streamonto
+
+ontology:
+
+  hasA:
+    subclass_of: 
+      - cuba.activeRelationship
+    inverse: streamonto.isPartOf
+    default_rel: true
+
+  isPartOf:
+    subclass_of: 
+      - cuba.passiveRelationship
+    inverse: streamonto.hasA
+
+  Dataset:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.hasA:
+          range: streamonto.UploadingDate
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.ObjectID
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.ProcessEndDateTime
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.XLSFile
+          cardinality: 1+
+          exclusive: false
+      - streamonto.hasA:
+          range: streamonto.Title
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.ContactPerson
+          cardinality: 1+
+          exclusive: false
+      - streaonto.hasA:
+          range: streamonto.Language
+          cardinality: 1+
+          exclusive: false
+      - streaonto.hasA:
+          range: streamonto.License
+          cardinality: 1+
+          exclusive: false 
+      - streaonto.hasA:
+          range: streamonto.Keyword
+          cardinality: 1+
+          exclusive: false
+      - streaonto.hasA:
+          range: streamonto.LandingPage
+          cardinality: 1
+          exclusive: true
+
+  UploadingDate:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.datetime:
+  
+  datetime:
+    description:
+      "YYYY-MM-DD hh:mm:ss"
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  ObjectID:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.object_id:
+
+  object_id:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  TemporalDataSet:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.ProcessEndDateTime
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.ProcessStartDateTime
+          cardinality: 1
+          exclusive: true
+
+  ProcessStartDateTime:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.datetime:
+  
+  ProcessEndDateTime:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.datetime:
+
+  XLSFile:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.hasA:
+          range: streamonto.FileName
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.URLToFolder
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.MediaType
+          cardinality: 1
+          exclusive: true
+
+  FileName:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.XLSFile
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.filename_xls_file:
+
+  filename_xls_file:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  URLToFolder:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.XLSFile
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.URL_xls_file:
+
+  URL_xls_file:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  MediaType:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.XLSFile
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.mime:
+
+  mime:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  Title:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.literal:
+
+  literal:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  ContactPerson:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1+
+          exclusive: false
+      - streamonto.hasA:
+          range: streamonto.FamilyName
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.GivenName
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.NickName
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.Email
+          cardinality: 1
+          exclusive: true
+      - streamonto.hasA:
+          range: streamonto.OrganizationName
+          cardinality: 1
+          exclusive: true
+
+  FamilyName:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.ContactPerson
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.literal:
+
+  GivenName:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.ContactPerson
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.literal:
+
+  NickName:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.ContactPerson
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.literal:
+
+  Email:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.ContactPerson
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.email_address:
+
+  email_address:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING
+
+  OrganizationName:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.ContactPerson
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.literal:
+
+  Language:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1+
+          exclusive: false
+    attributes:
+      streamonto.website:
+
+  License:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1+
+          exclusive: false
+    attributes:
+      streamonto.website:
+
+  Keyword:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1+
+          exclusive: false
+    attributes:
+      streamonto.literal:
+
+  LandingPage:
+    subclass_of:
+      - cuba.Entity
+      - streamonto.isPartOf:
+          range: streamonto.Dataset
+          cardinality: 1
+          exclusive: true
+    attributes:
+      streamonto.website:
+
+  website:
+    subclass_of:
+      - cuba.attribute
+    datatype: STRING

@@ -1,0 +1,833 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Marketplace Datasink application",
+    "description": "Datasink provides a place to store your simulation            data and retrieve it back. The data can be both binary data            and graph data.",
+    "contact": {
+      "name": "Pablo de Andres",
+      "url": "https://materials-marketplace.eu/",
+      "email": "pablo.de.andres@iwm.fraunhofer.de"
+    },
+    "version": "1.0.0",
+    "x-products": [
+          {
+              "name": "product A",
+              "productId": null
+          }
+      ],
+    "x-api-version": "0.3.0"
+  },
+  "servers": [
+    {
+      "url": "https://data-sink-app.materials-data.space/"
+    }
+  ],
+  "paths": {
+    "/data": {
+      "get": {
+        "summary": "Listcollections",
+        "description": "list_collections\n\nReturns:\ndict: A list of Collections/Catalogs.",
+        "operationId": "listCollections",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResponseModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Createcollection",
+        "description": "create_collection\n\nCreates a Collection/Catalog in datastore with DCAT\nrepresentation of meta-data.\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n- sub_collection_id (str): Collection ID to which the collection\n  needs to be added. Needed only if you are adding\n  it as a nested collection/catalog.\n\nReturns:\ndict: A dictionary containing the Collection ID created.",
+        "operationId": "createCollection",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_createCollection"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionCreateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/data/{collection_name}": {
+      "get": {
+        "summary": "Listdatasets",
+        "description": "list_datasets\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n\nReturns:\ndict: A list of datasets.",
+        "operationId": "listDatasets",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Createdataset",
+        "description": "create_dataset\n\nStores the dataset in the datastore with DCAT representation of meta-data.\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n- dataset_name (str): Dataset name.\n- sub_collection_id (str): Collection ID to which the dataset needs\n  to be added. Needed only if you are adding the dataset\n  to a nested collection/catalog.\n- file (UploadFile): The binary file uploaded as\n  part of the multipart form data.\n\nReturns:\ndict: A dictionary containing the dataset ID created.",
+        "operationId": "createDataset",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_createDataset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetCreateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Deletecollection",
+        "description": "delete_collection\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n\nReturns:\nNo content",
+        "operationId": "deleteCollection",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/data/{collection_name}/{dataset_name}": {
+      "get": {
+        "summary": "Getdataset",
+        "description": "get_dataset\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n- dataset_name (str):  The path parameter Dataset name.\n\nReturns:\nData payload as binary data.",
+        "operationId": "getDataset",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Dataset Name",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "dataset_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Deletedataset",
+        "description": "delete_dataset\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n- dataset_name (str): The path parameter dataset name value.\n\nReturns:\nNo content",
+        "operationId": "deleteDataset",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Dataset Name",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "dataset_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/dcat/{collection_name}": {
+      "get": {
+        "summary": "Getcollectiondcat",
+        "description": "get_collection_dcat\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n\nReturns:\nDCAT representation of collection in JSON-ld format.",
+        "operationId": "getCollectionDcat",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/dcat/{collection_name}/{dataset_name}": {
+      "get": {
+        "summary": "Getdatasetdcat",
+        "description": "get_dataset_dcat\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n- dataset_name (str): The path parameter dataset name value.\n\nReturns:\nDCAT representation of dataset in JSON-ld format.",
+        "operationId": "getDatasetDcat",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Dataset Name",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "dataset_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/query": {
+      "post": {
+        "summary": "Query",
+        "description": "query\n\nExecutes a spqrql query on the entire triple store.\n\nParameters:\n- query: A string representing sparql query\n- meta_data: Represents whether to query metadata or the actual data.\n\nReturns:\nList of matching rows as JSON data.",
+        "operationId": "query",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/query/{collection_name}/{dataset_name}": {
+      "post": {
+        "summary": "Querydataset",
+        "description": "query_dataset\n\nExecutes a spqrql query on triples specific to a dataset.\n\nParameters:\n- query: A string representing sparql query\n- collection_name (str): The path parameter collection name value.\n- dataset_name (str): The path parameter dataset name value.\n\nReturns:\nList of matching rows as JSON data.",
+        "operationId": "queryDataset",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Collection Name",
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "collection_name",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Dataset Name",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "dataset_name",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryDataset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/heartbeat": {
+      "get": {
+        "summary": "Check if app is alive",
+        "operationId": "heartbeat",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_createCollection": {
+        "title": "Body_createCollection",
+        "required": [
+          "collection_name"
+        ],
+        "type": "object",
+        "properties": {
+          "collection_name": {
+            "title": "Collection Name",
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "sub_collection_id": {
+            "title": "Sub Collection Id",
+            "type": "string"
+          }
+        }
+      },
+      "Body_createDataset": {
+        "title": "Body_createDataset",
+        "required": [
+          "dataset_name",
+          "file"
+        ],
+        "type": "object",
+        "properties": {
+          "dataset_name": {
+            "title": "Dataset Name",
+            "minLength": 1,
+            "type": "string"
+          },
+          "sub_collection_id": {
+            "title": "Sub Collection Id",
+            "type": "string"
+          },
+          "file": {
+            "title": "File",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "CollectionCreateResponse": {
+        "title": "CollectionCreateResponse",
+        "required": [
+          "last_modified"
+        ],
+        "type": "object",
+        "properties": {
+          "last_modified": {
+            "title": "Last Modified",
+            "type": "string",
+            "format": "date-time"
+          },
+          "collection_id": {
+            "title": "Collection Id",
+            "type": "string"
+          }
+        }
+      },
+      "CollectionListItemModel": {
+        "title": "CollectionListItemModel",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "last_modified": {
+            "title": "Last Modified",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CollectionResponseModel": {
+        "title": "CollectionResponseModel",
+        "required": [
+          "items"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionListItemModel"
+            }
+          }
+        }
+      },
+      "DatasetCreateResponse": {
+        "title": "DatasetCreateResponse",
+        "required": [
+          "last_modified"
+        ],
+        "type": "object",
+        "properties": {
+          "last_modified": {
+            "title": "Last Modified",
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataset_id": {
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "collection_id": {
+            "title": "Collection Id",
+            "type": "string"
+          }
+        }
+      },
+      "DatasetModel": {
+        "title": "DatasetModel",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "minLength": 1,
+            "type": "string"
+          },
+          "hash": {
+            "title": "Hash",
+            "type": "string"
+          },
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "content_type": {
+            "title": "Content Type",
+            "type": "string"
+          },
+          "last_modified": {
+            "title": "Last Modified",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DatasetResponseModel": {
+        "title": "DatasetResponseModel",
+        "required": [
+          "items"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetModel"
+            }
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Query": {
+        "title": "Query",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "meta_data": {
+            "title": "Meta Data",
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "example": {
+          "query": "SELECT ?subject ?predicate ?object WHERE                         { ?subject ?predicate ?object . } LIMIT 5",
+          "meta_data": "False"
+        }
+      },
+      "QueryDataset": {
+        "title": "QueryDataset",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "example": {
+          "query": "SELECT ?subject ?predicate ?object                     WHERE { ?subject ?predicate ?object . } LIMIT 5"
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

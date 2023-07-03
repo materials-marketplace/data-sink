@@ -1,0 +1,68 @@
+version: "3.4"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: dev      
+      args:
+        - RDFLIB_PACKAGE_TOKEN=${RDFLIB_PACKAGE_TOKEN}
+        - AGRAPH_PACKAGE_TOKEN=${AGRAPH_PACKAGE_TOKEN}
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - agraph
+      - sql-db
+    networks:
+      - intranet
+
+  agraph:
+    image: franzinc/agraph
+    volumes:
+      - agraph-data:/agraph/data
+      #- ${AGRAPH_CERT_BUNDLE}:/etc/ssl/certs/bundle.pem
+    expose:
+      - "10000-10036"
+    env_file:
+      - .env
+    restart: on-failure
+    shm_size: 4g
+    networks:
+      - intranet
+
+  sql-db:
+    image: postgres:13
+    volumes:
+      - sql-data:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    env_file:
+      - .env
+    networks:
+      - intranet
+
+  # web-service:
+  #   build:
+  #     context: .
+  #     dockerfile: ./web-service/Dockerfile
+  #   volumes:
+  #     - ./database:/database
+  #     - ./web-service:/app
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     - PYTHONWARNINGS=ignore:Unverified HTTPS request
+  #   ports:
+  #     - "5090:5090"
+  #   depends_on:
+  #     - simphony
+
+volumes:
+  agraph-data:
+  sql-data:
+
+networks:
+  intranet:
+    driver: bridge

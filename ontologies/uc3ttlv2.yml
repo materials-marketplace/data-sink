@@ -1,0 +1,6 @@
+identifier: uc3
+ontology_file: ./uc3ttlv2.ttl
+reference_by_label: True
+namespaces:
+    uc3: http://the-marketplace-project.eu/uc3#
+format: turtle
