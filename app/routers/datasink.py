@@ -49,13 +49,13 @@ def get_db():
     operation_id="listCollections",
     response_model=CollectionResponseModel,
 )
-async def listCollections() -> CollectionResponseModel:
+async def listCollections(db: Session = Depends(get_db)) -> CollectionResponseModel:
     """list_collections
 
     Returns:
     dict: A list of Collections/Catalogs.
     """
-    catalogs = CudsDataset.list_collections()
+    catalogs = CudsDataset.list_collections(db)
     return {"items": catalogs}
 
 
@@ -89,7 +89,7 @@ async def createCollection(
     parent_catalog_id = None
     if parent_collection_id is not None:
         parent_catalog_id = CudsDataset.by_catalog_id(parent_collection_id)
-        print("parent catalog ID ", parent_catalog_id)
+        #print("parent catalog ID ", parent_catalog_id)
 
     if parent_catalog_id is None:
         # This means we are creating top level collection and
@@ -101,8 +101,8 @@ async def createCollection(
         if catalog_id is not None:
             raise HTTPException(
                 status_code=400,
-                detail="There is already a collection with given name. \
-                    Root collection name should be always unique.",
+                detail="There is already a collection with given name." +
+                    " Root collection name should be always unique.",
             )
         print("Creating catalog: ", catalog_title)
         response = CudsDataset.create_catalog(catalog_title, parent_catalog_id)
@@ -120,6 +120,7 @@ async def createCollection(
 )
 async def listDatasets(
     collection_name: CollectionName,
+    db: Session = Depends(get_db)
 ) -> DatasetResponseModel:
     """list_datasets
 
@@ -129,7 +130,7 @@ async def listDatasets(
     Returns:
     dict: A list of datasets.
     """
-    datasets = CudsDataset.list_datasets(collection_name)
+    datasets = CudsDataset.list_datasets(collection_name, db)
     return {"items": datasets}
 
 
@@ -138,7 +139,8 @@ async def listDatasets(
     status_code=status.HTTP_204_NO_CONTENT,
     operation_id="deleteCollection",
 )
-async def deleteCollection(collection_name: CollectionName):
+async def deleteCollection(collection_name: CollectionName,
+                           db: Session = Depends(get_db)):
     """delete_collection
 
     Parameters:
@@ -147,7 +149,7 @@ async def deleteCollection(collection_name: CollectionName):
     Returns:
     No content
     """
-    result = CudsDataset.delete_collection(collection_name)
+    result = CudsDataset.delete_collection(collection_name, db)
     if result is None:
         raise HTTPException(
             status_code=404,
@@ -232,8 +234,9 @@ async def createDataset(
     # find the root collection
     catalog_id = CudsDataset.by_catalog_title(collection_name, root_only=True)
     if catalog_id is None:
-        catalog_id = CudsDataset.create_catalog(collection_name, None)
-        id["collection_id"] = catalog_id
+        response = CudsDataset.create_catalog(collection_name, None)
+        catalog_id = response.collection_id
+        id["collection_id"] = response.collection_id
     parent_catalog_id = catalog_id
 
     # find if there is already a dataset with
@@ -242,8 +245,8 @@ async def createDataset(
     if len(datasets) > 0:
         raise HTTPException(
             status_code=409,
-            detail="There is already a dataset with same \
-                name in the given collection name",
+            detail="There is already a dataset with same " +
+                "name in the given collection name",
         )
 
     # collection_id corresponds to sub folder ID
@@ -253,8 +256,8 @@ async def createDataset(
         if sub_collection is None:
             raise HTTPException(
                 status_code=404,
-                detail="There is no collection found \
-                    with given sub_collection_id",
+                detail="There is no collection found " +
+                    "with given sub_collection_id",
             )
         parent_catalog_id = sub_collection_id
 

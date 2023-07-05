@@ -7,6 +7,7 @@ from pydantic import BaseModel, BaseSettings, ConstrainedStr, Field
 class BinaryDataset(BaseModel):
     dataset_id: str
     data: bytes
+    hash: str = None
 
     class Config:
         orm_mode = True
@@ -43,8 +44,8 @@ class Query(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "query": "SELECT ?subject ?predicate ?object WHERE \
-                        { ?subject ?predicate ?object . } LIMIT 5",
+                "query": "SELECT ?subject ?predicate ?object WHERE " +
+                        "{ ?subject ?predicate ?object . } LIMIT 5",
                 "meta_data": "False",
             }
         }
@@ -56,8 +57,8 @@ class QueryDataset(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "query": "SELECT ?subject ?predicate ?object \
-                    WHERE { ?subject ?predicate ?object . } LIMIT 5"
+                "query": "SELECT ?subject ?predicate ?object " +
+                    "WHERE { ?subject ?predicate ?object . } LIMIT 5"
             }
         }
 
@@ -99,6 +100,8 @@ class DatasetModel(BaseModel):
     bytes: Optional[int]
     content_type: Optional[str]
     last_modified: Optional[datetime]
+    relative_path:  Optional[str]
+    dcat_type: Optional[str]
 
 
 class DatasetResponseModel(BaseModel):

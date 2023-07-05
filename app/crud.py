@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app import models, schemas
+import hashlib
 
 
 def by_dataset_id(db: Session, dataset_id: str):
@@ -12,7 +13,8 @@ def by_dataset_id(db: Session, dataset_id: str):
 
 
 def create_dataset(db: Session, dataset: schemas.BinaryDataset):
-    dataset = models.Dataset(dataset_id=dataset.dataset_id, data=dataset.data)
+    md5_hash = hashlib.md5(dataset.data).hexdigest()
+    dataset = models.Dataset(dataset_id=dataset.dataset_id, data=dataset.data, hash=md5_hash)
     db.add(dataset)
     db.commit()
     db.refresh(dataset)
@@ -25,7 +27,9 @@ def update_dataset(db: Session, dataset: schemas.BinaryDataset):
         .filter(models.Dataset.dataset_id == dataset.dataset_id)
         .first()
     )
+    md5_hash = hashlib.md5(dataset.data).hexdigest()
     dataset_db.data = dataset.data
+    dataset.hash = md5_hash
     db.commit()
 
 

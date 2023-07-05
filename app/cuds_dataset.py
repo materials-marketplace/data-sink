@@ -363,7 +363,7 @@ class CudsDataset:
                         io.StringIO(decoded_data), format=cuds_format
                     )
                     # g.parse(io.StringIO(decoded_data), format=cuds_format)
-
+                    
                     binary_dataset = BinaryDataset(
                         dataset_id=dataset_uid, data=data
                     )
@@ -434,7 +434,7 @@ class CudsDataset:
         return list(result)
 
     @classmethod
-    def delete_collection(cls, collection_name):
+    def delete_collection(cls, collection_name, db = None):
         """delete_collection
 
         Delete a specific collection/catalog from datastore.
@@ -449,15 +449,15 @@ class CudsDataset:
         if catalog_id is None:
             raise HTTPException(
                 status_code=404,
-                detail="There is no Root collection \
-                                    with given name.",
+                detail="There is no Root collection " +
+                                    "with given name.",
             )
         else:
-            individual_datasets = cls.list_datasets(collection_name)
+            individual_datasets = cls.list_datasets(collection_name, db)
             has_datasets = False
 
             for dataset in individual_datasets:
-                if dataset["type"] == "http://www.w3.org/ns/dcat#Dataset":
+                if dataset["dcat_type"] == "http://www.w3.org/ns/dcat#Dataset":
                     has_datasets = True
 
             # if it has any datasets or distributions
@@ -466,9 +466,9 @@ class CudsDataset:
             if has_datasets:
                 raise HTTPException(
                     status_code=409,
-                    detail="Collection is not empty. Please\
-                                        remove all the individual datasets \
-                                            and then try again.",
+                    detail="Collection is not empty. Please " +
+                                        "remove all the individual datasets " +
+                                            "and then try again.",
                 )
             else:
                 with allegro_graph_session() as session:
@@ -583,8 +583,8 @@ class CudsDataset:
             else:
                 raise HTTPException(
                     status_code=404,
-                    detail="There is no root collection\
-                                        with given name.",
+                    detail="There is no root collection " +
+                                        "with given name.",
                 )
             # delete actual data
             if identifier is not None:
@@ -606,7 +606,7 @@ class CudsDataset:
         return None
 
     @classmethod
-    def list_collections(cls):
+    def list_collections(cls, db = None):
         """list_collections
 
         Return all the catalogs/collections in the datastore.
@@ -635,18 +635,31 @@ class CudsDataset:
                         individual.is_a(dcat3.Catalog)
                         and len(list(individual[dcterms.type])) > 0
                     ):
+                        title = list(individual[dcterms.title])[0]
+                        datasets = cls.list_datasets(title, db)
+                        total_size = 0
+                        
+                        for dataset in datasets:
+                            size = dataset["bytes"]
+                            # ignore sub folders with in collection
+                            if size is None:
+                                size = 0
+                            total_size += size
+                                                
                         catalog = {
-                            "name": list(individual[dcterms.title])[0],
+                            "name": title,
                             "last_modified": list(
                                 individual[dcterms.modified]
                             )[0],
-                            "type": "http://www.w3.org/ns/dcat#Catalog",
+                            "dcat_type": "http://www.w3.org/ns/dcat#Catalog",
+                            "count": len(datasets),
+                            "bytes": total_size
                         }
                         collections.append(catalog)
         return collections
 
     @classmethod
-    def list_datasets(cls, collection_name):
+    def list_datasets(cls, collection_name, db=None):
         """list_datasets
 
         Return all the datasets with in a specific collection in the datastore.
@@ -686,15 +699,25 @@ class CudsDataset:
                             if individual.is_a(dcat3.Catalog):
                                 type = "http://www.w3.org/ns/dcat#Catalog"
                                 title = list(individual[dcterms.title])[0]
+                                size = None
+                                hash = None
+                                content_type = None
                             else:
                                 type = "http://www.w3.org/ns/dcat#Dataset"
-                                print(individual, individual[dcterms.modified])
-                                print(list(individual[dcat3.distribution]))
+                                #print(individual, individual[dcterms.modified])
+                                #print(list(individual[dcat3.distribution]))
                                 title = list(
                                     list(individual[dcat3.distribution])[0][
                                         dcterms.title
                                     ]
                                 )[0]
+                                identifier = list(individual[dcterms.identifier])[0]
+                                dataset = by_dataset_id(
+                                    db=db, dataset_id=identifier
+                                    )
+                                size = len(dataset.data)
+                                hash = dataset.hash
+                                content_type = "application/octet-stream"
                             path = ""
                             if len(list(individual[dcterms.isPartOf])) > 0:
                                 path = cls.get_dataset_full_path(
@@ -705,8 +728,11 @@ class CudsDataset:
                                 "last_modified": list(
                                     individual[dcterms.modified]
                                 )[0],
-                                "type": type,
-                                "path": path,
+                                "dcat_type": type,
+                                "relative_path": path,
+                                "bytes": size,
+                                "hash": hash,
+                                "content_type": content_type
                             }
                             datasets.append(item)
                 if len(datasets) > 0:
@@ -714,8 +740,8 @@ class CudsDataset:
             else:
                 raise HTTPException(
                     status_code=404,
-                    detail="There is no root collection \
-                                        with given name.",
+                    detail="There is no root collection " +
+                                        "with given name.",
                 )
         return datasets
 
@@ -911,8 +937,8 @@ class CudsDataset:
             else:
                 raise HTTPException(
                     status_code=404,
-                    detail="There is no\
-                    Root collection with given name.",
+                    detail="There is no " +
+                    "Root collection with given name.",
                 )
 
         return dataset_result
