@@ -363,7 +363,7 @@ class CudsDataset:
                         io.StringIO(decoded_data), format=cuds_format
                     )
                     # g.parse(io.StringIO(decoded_data), format=cuds_format)
-                    
+
                     binary_dataset = BinaryDataset(
                         dataset_id=dataset_uid, data=data
                     )
@@ -434,13 +434,14 @@ class CudsDataset:
         return list(result)
 
     @classmethod
-    def delete_collection(cls, collection_name, db = None):
+    def delete_collection(cls, collection_name, db=None):
         """delete_collection
 
         Delete a specific collection/catalog from datastore.
 
         Parameters:
         - collection_name (str): name of the collection.
+        - db : postgres sql database session.
 
         Returns:
         bool: True if deletion is success.
@@ -449,8 +450,7 @@ class CudsDataset:
         if catalog_id is None:
             raise HTTPException(
                 status_code=404,
-                detail="There is no Root collection " +
-                                    "with given name.",
+                detail="There is no Root collection " + "with given name.",
             )
         else:
             individual_datasets = cls.list_datasets(collection_name, db)
@@ -466,9 +466,9 @@ class CudsDataset:
             if has_datasets:
                 raise HTTPException(
                     status_code=409,
-                    detail="Collection is not empty. Please " +
-                                        "remove all the individual datasets " +
-                                            "and then try again.",
+                    detail="Collection is not empty. Please "
+                    + "remove all the individual datasets "
+                    + "and then try again.",
                 )
             else:
                 with allegro_graph_session() as session:
@@ -514,6 +514,7 @@ class CudsDataset:
         Parameters:
         - collection_name (str): name of the collection.
         - dataset_name (str): name of the dataset.
+        - db : postgres sql database session.
 
         Returns:
         bool: True if deletion is success.
@@ -583,8 +584,7 @@ class CudsDataset:
             else:
                 raise HTTPException(
                     status_code=404,
-                    detail="There is no root collection " +
-                                        "with given name.",
+                    detail="There is no root collection " + "with given name.",
                 )
             # delete actual data
             if identifier is not None:
@@ -606,10 +606,13 @@ class CudsDataset:
         return None
 
     @classmethod
-    def list_collections(cls, db = None):
+    def list_collections(cls, db=None):
         """list_collections
 
         Return all the catalogs/collections in the datastore.
+
+        Parameters:
+        - db : postgres sql database session.
 
         Returns:
         list: List of metadata information of all collections.
@@ -638,14 +641,14 @@ class CudsDataset:
                         title = list(individual[dcterms.title])[0]
                         datasets = cls.list_datasets(title, db)
                         total_size = 0
-                        
+
                         for dataset in datasets:
                             size = dataset["bytes"]
                             # ignore sub folders with in collection
                             if size is None:
                                 size = 0
                             total_size += size
-                                                
+
                         catalog = {
                             "name": title,
                             "last_modified": list(
@@ -653,7 +656,7 @@ class CudsDataset:
                             )[0],
                             "dcat_type": "http://www.w3.org/ns/dcat#Catalog",
                             "count": len(datasets),
-                            "bytes": total_size
+                            "bytes": total_size,
                         }
                         collections.append(catalog)
         return collections
@@ -666,6 +669,7 @@ class CudsDataset:
 
         Parameters:
         - collection_name (str): name of the collection.
+        - db : postgres sql database session.
 
         Returns:
         list: List of metadata information of all datasets.
@@ -704,17 +708,17 @@ class CudsDataset:
                                 content_type = None
                             else:
                                 type = "http://www.w3.org/ns/dcat#Dataset"
-                                #print(individual, individual[dcterms.modified])
-                                #print(list(individual[dcat3.distribution]))
                                 title = list(
                                     list(individual[dcat3.distribution])[0][
                                         dcterms.title
                                     ]
                                 )[0]
-                                identifier = list(individual[dcterms.identifier])[0]
+                                identifier = list(
+                                    individual[dcterms.identifier]
+                                )[0]
                                 dataset = by_dataset_id(
                                     db=db, dataset_id=identifier
-                                    )
+                                )
                                 size = len(dataset.data)
                                 hash = dataset.hash
                                 content_type = "application/octet-stream"
@@ -732,7 +736,7 @@ class CudsDataset:
                                 "relative_path": path,
                                 "bytes": size,
                                 "hash": hash,
-                                "content_type": content_type
+                                "content_type": content_type,
                             }
                             datasets.append(item)
                 if len(datasets) > 0:
@@ -740,8 +744,7 @@ class CudsDataset:
             else:
                 raise HTTPException(
                     status_code=404,
-                    detail="There is no root collection " +
-                                        "with given name.",
+                    detail="There is no root collection " + "with given name.",
                 )
         return datasets
 
@@ -817,6 +820,7 @@ class CudsDataset:
         Parameters:
         - collection_name (str): Name of the Catalog.
         - dataset_name (str): Name of the Dataset.
+        - db : postgres sql database session.
 
         Returns:
         bytes: Binary content.
@@ -937,8 +941,7 @@ class CudsDataset:
             else:
                 raise HTTPException(
                     status_code=404,
-                    detail="There is no " +
-                    "Root collection with given name.",
+                    detail="There is no " + "Root collection with given name.",
                 )
 
         return dataset_result

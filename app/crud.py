@@ -1,7 +1,8 @@
+import hashlib
+
 from sqlalchemy.orm import Session
 
 from app import models, schemas
-import hashlib
 
 
 def by_dataset_id(db: Session, dataset_id: str):
@@ -14,7 +15,9 @@ def by_dataset_id(db: Session, dataset_id: str):
 
 def create_dataset(db: Session, dataset: schemas.BinaryDataset):
     md5_hash = hashlib.md5(dataset.data).hexdigest()
-    dataset = models.Dataset(dataset_id=dataset.dataset_id, data=dataset.data, hash=md5_hash)
+    dataset = models.Dataset(
+        dataset_id=dataset.dataset_id, data=dataset.data, hash=md5_hash
+    )
     db.add(dataset)
     db.commit()
     db.refresh(dataset)

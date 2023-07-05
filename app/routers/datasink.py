@@ -49,7 +49,9 @@ def get_db():
     operation_id="listCollections",
     response_model=CollectionResponseModel,
 )
-async def listCollections(db: Session = Depends(get_db)) -> CollectionResponseModel:
+async def listCollections(
+    db: Session = Depends(get_db),
+) -> CollectionResponseModel:
     """list_collections
 
     Returns:
@@ -89,7 +91,7 @@ async def createCollection(
     parent_catalog_id = None
     if parent_collection_id is not None:
         parent_catalog_id = CudsDataset.by_catalog_id(parent_collection_id)
-        #print("parent catalog ID ", parent_catalog_id)
+        # print("parent catalog ID ", parent_catalog_id)
 
     if parent_catalog_id is None:
         # This means we are creating top level collection and
@@ -101,8 +103,8 @@ async def createCollection(
         if catalog_id is not None:
             raise HTTPException(
                 status_code=400,
-                detail="There is already a collection with given name." +
-                    " Root collection name should be always unique.",
+                detail="There is already a collection with given name."
+                + " Root collection name should be always unique.",
             )
         print("Creating catalog: ", catalog_title)
         response = CudsDataset.create_catalog(catalog_title, parent_catalog_id)
@@ -119,8 +121,7 @@ async def createCollection(
     response_model=DatasetResponseModel,
 )
 async def listDatasets(
-    collection_name: CollectionName,
-    db: Session = Depends(get_db)
+    collection_name: CollectionName, db: Session = Depends(get_db)
 ) -> DatasetResponseModel:
     """list_datasets
 
@@ -139,8 +140,9 @@ async def listDatasets(
     status_code=status.HTTP_204_NO_CONTENT,
     operation_id="deleteCollection",
 )
-async def deleteCollection(collection_name: CollectionName,
-                           db: Session = Depends(get_db)):
+async def deleteCollection(
+    collection_name: CollectionName, db: Session = Depends(get_db)
+):
     """delete_collection
 
     Parameters:
@@ -245,8 +247,8 @@ async def createDataset(
     if len(datasets) > 0:
         raise HTTPException(
             status_code=409,
-            detail="There is already a dataset with same " +
-                "name in the given collection name",
+            detail="There is already a dataset with same "
+            + "name in the given collection name",
         )
 
     # collection_id corresponds to sub folder ID
@@ -256,8 +258,8 @@ async def createDataset(
         if sub_collection is None:
             raise HTTPException(
                 status_code=404,
-                detail="There is no collection found " +
-                    "with given sub_collection_id",
+                detail="There is no collection found "
+                + "with given sub_collection_id",
             )
         parent_catalog_id = sub_collection_id
 
