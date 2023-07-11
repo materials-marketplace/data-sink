@@ -17,7 +17,7 @@ RUN cd ./ontologies && pico install ./marketplace.yml
 RUN python3 -m simphony_osp.tools.pico install emmo
 RUN cd ./ontologies &&  python3 -m simphony_osp.tools.pico install dcat3.yml
 
-COPY requirements.txt packageinfo.py ./
+COPY requirements.txt packageinfo.py setup.py setup.cfg ./
 COPY app ./app
 RUN chmod -R 0777 .
 
@@ -25,7 +25,7 @@ EXPOSE 8080
 
 from base as dev
 WORKDIR /usr/src/app
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install .
 
 ENTRYPOINT ["uvicorn"]
 
