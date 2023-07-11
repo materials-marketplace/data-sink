@@ -386,7 +386,7 @@ async def query(query: Query) -> JSONResponse:
 async def queryDataset(
     collection_name: CollectionName,
     dataset_name: DatasetName,
-    query: QueryDataset,
+    query: Annotated[QueryDataset, Body()] = None,
 ) -> JSONResponse:
     """query_dataset
 

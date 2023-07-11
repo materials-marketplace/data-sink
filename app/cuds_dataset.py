@@ -400,12 +400,18 @@ class CudsDataset:
         Returns:
         list: List of matching triples.
         """
-        if meta_data:
-            with allegro_graph_session() as session:
-                result = sparql(query_string, session=session)
-        else:
-            g = data_space_session()
-            result = g.store.query(query_string)
+        try:
+            if meta_data:
+                with allegro_graph_session() as session:
+                    result = sparql(query_string, session=session)
+            else:
+                g = data_space_session()
+                result = g.store.query(query_string)
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=str(e),
+            )
         return list(result)
 
     @classmethod
@@ -422,15 +428,21 @@ class CudsDataset:
         Returns:
         list: List of matching triples.
         """
-        g = data_space_session()
-        named_graph = collection_name + "_" + dataset_name
-        context = g.get_context(named_graph)
-        triples = context.triples((None, None, None))
+        try:
+            g = data_space_session()
+            named_graph = collection_name + "_" + dataset_name
+            context = g.get_context(named_graph)
+            triples = context.triples((None, None, None))
 
-        g = Graph()
-        for triple in triples:
-            g.add(triple)
-        result = g.query(query_string)
+            g = Graph()
+            for triple in triples:
+                g.add(triple)
+            result = g.query(query_string)
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=str(e),
+            )
         return list(result)
 
     @classmethod

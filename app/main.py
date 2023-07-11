@@ -60,15 +60,13 @@ def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
     openapi_schema = get_openapi(
-        title="Marketplace Datasink application",
-        description="Datasink provides a place to store your simulation\
-            data and retrieve it back. The data can be both binary data\
-            and graph data.",
-        version="1.0.0",
+        title=NAME,
+        description=DESCRIPTION,
+        version=VERSION,
         contact={
-            "name": "Pablo de Andres",
+            "name": "Kiran Kumaraswamy",
             "url": "https://materials-marketplace.eu/",
-            "email": "pablo.de.andres@iwm.fraunhofer.de",
+            "email": "kiran.kumaraswamy@iwm.fraunhofer.de",
         },
         servers=[{"url": CONFIG.application_url}],
         routes=app.routes,

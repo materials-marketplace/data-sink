@@ -2,25 +2,35 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Marketplace Datasink application",
-    "description": "Datasink provides a place to store your simulation            data and retrieve it back. The data can be both binary data            and graph data.",
+    "description": "Datasink provides a place to store your simulation data and retrieve it back. The data can be both binary data and graph data.",
     "contact": {
-      "name": "Pablo de Andres",
+      "name": "Kiran Kumaraswamy",
       "url": "https://materials-marketplace.eu/",
-      "email": "pablo.de.andres@iwm.fraunhofer.de"
+      "email": "kiran.kumaraswamy@iwm.fraunhofer.de"
     },
-    "version": "1.0.0",
+    "version": "0.1.0",
+    "x-api-version": "0.3.0",
     "x-products": [
           {
               "name": "product A",
               "productId": null
           }
-      ],
-    "x-api-version": "0.3.0"
+      ]
   },
   "servers": [
     {
       "url": "https://data-sink-app.materials-data.space/"
     }
+  ],
+  "tags": [
+      {
+          "name": "DataSink",
+          "description": "Provides functionalities for storing data."
+      },
+      {
+          "name": "MarketPlace",
+          "description": "Provides functionalities for connecting to MarketPlace."
+      }
   ],
   "paths": {
     "/data": {
@@ -509,8 +519,7 @@
                 "$ref": "#/components/schemas/QueryDataset"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -718,6 +727,14 @@
             "title": "Last Modified",
             "type": "string",
             "format": "date-time"
+          },
+          "relative_path": {
+            "title": "Relative Path",
+            "type": "string"
+          },
+          "dcat_type": {
+            "title": "Dcat Type",
+            "type": "string"
           }
         }
       },
@@ -768,7 +785,7 @@
           }
         },
         "example": {
-          "query": "SELECT ?subject ?predicate ?object WHERE                         { ?subject ?predicate ?object . } LIMIT 5",
+          "query": "SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object . } LIMIT 5",
           "meta_data": "False"
         }
       },
@@ -785,7 +802,7 @@
           }
         },
         "example": {
-          "query": "SELECT ?subject ?predicate ?object                     WHERE { ?subject ?predicate ?object . } LIMIT 5"
+          "query": "SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object . } LIMIT 5"
         }
       },
       "ValidationError": {
