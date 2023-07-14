@@ -5,7 +5,7 @@ import uvicorn
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse, RedirectResponse
-from fastapi.security import HTTPBearer
+from shieldapi.frameworks.fastapi import AuthTokenBearer
 
 from app import models
 from app.database import engine
@@ -34,7 +34,7 @@ def get_auth_deps() -> List[Depends]:
         List of FastAPI dependencies with authentication functions.
     """
     if CONFIG.auth_deps:
-        dependencies = [Depends(HTTPBearer(bearerFormat="JWT"))]
+        dependencies = [Depends(AuthTokenBearer(bearerFormat="JWT"))]
     else:
         dependencies = []
         print("No dependencies for authentication assigned.")
