@@ -296,9 +296,10 @@ async def deleteDataset(
 
 
 @data_sink_router.get(
-    "/dcat/{collection_name}", operation_id="getCollectionDcat"
+    "/metadata/dcat/{collection_name}",
+    operation_id="getCollectionMetadataDcat",
 )
-async def getCollectionDcat(
+async def getCollectionMetadataDcat(
     collection_name: CollectionName,
 ) -> JSONResponse:
     """get_collection_dcat
@@ -329,9 +330,10 @@ async def getCollectionDcat(
 
 
 @data_sink_router.get(
-    "/dcat/{collection_name}/{dataset_name}", operation_id="getDatasetDcat"
+    "/metadata/dcat/{collection_name}/{dataset_name}",
+    operation_id="getDatasetMetadataDcat",
 )
-async def getDatasetDcat(
+async def getDatasetMetadataDcat(
     collection_name: CollectionName, dataset_name: DatasetName
 ) -> JSONResponse:
     """get_dataset_dcat
