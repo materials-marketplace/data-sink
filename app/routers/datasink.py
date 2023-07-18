@@ -228,7 +228,6 @@ async def createDataset(
     # read the contents of the file
     data = await file.read()
 
-    id = {}
     dataset_title = dataset_name
 
     parent_catalog_id = None
@@ -236,9 +235,10 @@ async def createDataset(
     # find the root collection
     catalog_id = CudsDataset.by_catalog_title(collection_name, root_only=True)
     if catalog_id is None:
-        response = CudsDataset.create_catalog(collection_name, None)
-        catalog_id = response.collection_id
-        id["collection_id"] = response.collection_id
+        raise HTTPException(
+            status_code=404,
+            detail="There is no collection with given " + "collection name.",
+        )
     parent_catalog_id = catalog_id
 
     # find if there is already a dataset with

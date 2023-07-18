@@ -380,11 +380,7 @@ class CudsDataset:
 
             except Exception as e:
                 raise HTTPException(status_code=500, detail=str(e))
-        return DatasetCreateResponse(
-            dataset_id=dataset_uid,
-            collection_id=parent_catalog_id,
-            last_modified=modified_time,
-        )
+        return DatasetCreateResponse(last_modified=modified_time)
 
     @classmethod
     def query(cls, query_string, meta_data=False):
@@ -663,6 +659,7 @@ class CudsDataset:
 
                         catalog = {
                             "name": title,
+                            "id": list(individual[dcterms.identifier])[0],
                             "last_modified": list(
                                 individual[dcterms.modified]
                             )[0],

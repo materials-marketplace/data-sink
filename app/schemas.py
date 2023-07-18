@@ -68,15 +68,16 @@ class CollectionName(ConstrainedStr):
     max_length = 255
 
 
-class CollectionListItemModel(BaseModel):
+class CollectionModel(BaseModel):
     count: Optional[int]
     bytes: Optional[int]
+    id: Optional[int]
     name: CollectionName
     last_modified: Optional[datetime]
 
 
 class CollectionResponseModel(BaseModel):
-    items: List[CollectionListItemModel]
+    items: List[CollectionModel]
 
 
 class CollectionCreateResponse(BaseModel):
@@ -90,8 +91,6 @@ class DatasetName(ConstrainedStr):
 
 class DatasetCreateResponse(BaseModel):
     last_modified: datetime
-    dataset_id: Optional[str]
-    collection_id: Optional[str]
 
 
 class DatasetModel(BaseModel):
@@ -100,8 +99,6 @@ class DatasetModel(BaseModel):
     bytes: Optional[int]
     content_type: Optional[str]
     last_modified: Optional[datetime]
-    relative_path: Optional[str]
-    dcat_type: Optional[str]
 
 
 class DatasetResponseModel(BaseModel):
