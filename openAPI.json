@@ -1,16 +1,16 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Marketplace Datasink application",
-    "description": "Datasink provides a place to store your simulation data and retrieve it back. The data can be both binary data and graph data.",
-    "contact": {
-      "name": "Kiran Kumaraswamy",
-      "url": "https://materials-marketplace.eu/",
-      "email": "kiran.kumaraswamy@iwm.fraunhofer.de"
-    },
-    "version": "0.1.0",
-    "x-api-version": "0.3.0",
-    "x-products": [
+      "title": "DataSink Latest",
+      "x-api-version": "0.3.0",
+      "description": "OpenAPI Specification of a data-sink application",
+	  "contact": {
+          "name": "Kiran Kumaraswamy",
+		  "url": "https://materials-marketplace.eu/",
+		  "email": "kiran.kumaraswamy@iwm.fraunhofer.de"
+	  },
+      "version": "1.0.0",
+      "x-products": [
           {
               "name": "product A",
               "productId": null
@@ -18,9 +18,9 @@
       ]
   },
   "servers": [
-    {
-      "url": "https://data-sink-app.materials-data.space/"
-    }
+      {
+          "url": "https://data-sink-app.materials-data.space/"
+      }
   ],
   "tags": [
       {
@@ -52,7 +52,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       },
@@ -94,7 +94,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
@@ -141,7 +141,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       },
@@ -196,7 +196,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       },
@@ -234,7 +234,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
@@ -289,7 +289,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       },
@@ -337,16 +337,16 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
     },
-    "/dcat/{collection_name}": {
+    "/metadata/dcat/{collection_name}": {
       "get": {
-        "summary": "Getcollectiondcat",
+        "summary": "Getcollectionmetadatadcat",
         "description": "get_collection_dcat\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n\nReturns:\nDCAT representation of collection in JSON-ld format.",
-        "operationId": "getCollectionDcat",
+        "operationId": "getCollectionMetadataDcat",
         "parameters": [
           {
             "required": true,
@@ -382,16 +382,16 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
     },
-    "/dcat/{collection_name}/{dataset_name}": {
+    "/metadata/dcat/{collection_name}/{dataset_name}": {
       "get": {
-        "summary": "Getdatasetdcat",
+        "summary": "Getdatasetmetadatadcat",
         "description": "get_dataset_dcat\n\nParameters:\n- collection_name (str): The path parameter collection name value.\n- dataset_name (str): The path parameter dataset name value.\n\nReturns:\nDCAT representation of dataset in JSON-ld format.",
-        "operationId": "getDatasetDcat",
+        "operationId": "getDatasetMetadataDcat",
         "parameters": [
           {
             "required": true,
@@ -437,7 +437,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
@@ -479,7 +479,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
@@ -543,7 +543,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
@@ -564,7 +564,7 @@
         },
         "security": [
           {
-            "HTTPBearer": []
+            "AuthTokenBearer": []
           }
         ]
       }
@@ -633,8 +633,8 @@
           }
         }
       },
-      "CollectionListItemModel": {
-        "title": "CollectionListItemModel",
+      "CollectionModel": {
+        "title": "CollectionModel",
         "required": [
           "name"
         ],
@@ -647,6 +647,10 @@
           "bytes": {
             "title": "Bytes",
             "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
           },
           "name": {
             "title": "Name",
@@ -672,7 +676,7 @@
             "title": "Items",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CollectionListItemModel"
+              "$ref": "#/components/schemas/CollectionModel"
             }
           }
         }
@@ -688,14 +692,6 @@
             "title": "Last Modified",
             "type": "string",
             "format": "date-time"
-          },
-          "dataset_id": {
-            "title": "Dataset Id",
-            "type": "string"
-          },
-          "collection_id": {
-            "title": "Collection Id",
-            "type": "string"
           }
         }
       },
@@ -727,14 +723,6 @@
             "title": "Last Modified",
             "type": "string",
             "format": "date-time"
-          },
-          "relative_path": {
-            "title": "Relative Path",
-            "type": "string"
-          },
-          "dcat_type": {
-            "title": "Dcat Type",
-            "type": "string"
           }
         }
       },
