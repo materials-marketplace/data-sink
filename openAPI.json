@@ -4,11 +4,11 @@
       "title": "DataSink Latest",
       "x-api-version": "0.3.0",
       "description": "OpenAPI Specification of a data-sink application",
-	  "contact": {
+      "contact": {
           "name": "Kiran Kumaraswamy",
-		  "url": "https://materials-marketplace.eu/",
-		  "email": "kiran.kumaraswamy@iwm.fraunhofer.de"
-	  },
+          "url": "https://materials-marketplace.eu/",
+          "email": "kiran.kumaraswamy@iwm.fraunhofer.de"
+      },
       "version": "1.0.0",
       "x-products": [
           {
