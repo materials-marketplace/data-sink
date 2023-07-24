@@ -69,7 +69,7 @@ async def listCollections(
 )
 async def createCollection(
     collection_name: Annotated[CollectionName, Form()],
-    sub_collection_id: Annotated[str, Form()] = None,
+    sub_collection_id: str = Form(None),
 ) -> CollectionCreateResponse:
     """create_collection
 
@@ -202,7 +202,7 @@ async def getDataset(
 async def createDataset(
     collection_name: CollectionName,
     dataset_name: Annotated[DatasetName, Body()],
-    sub_collection_id: Annotated[str, Body()] = None,
+    sub_collection_id: str = Form(None),
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
 ) -> DatasetCreateResponse:
@@ -388,7 +388,7 @@ async def query(query: Query) -> JSONResponse:
 async def queryDataset(
     collection_name: CollectionName,
     dataset_name: DatasetName,
-    query: Annotated[QueryDataset, Body()] = None,
+    query: QueryDataset = Body(None),
 ) -> JSONResponse:
     """query_dataset
 

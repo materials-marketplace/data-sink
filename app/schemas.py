@@ -15,8 +15,8 @@ class BinaryDataset(BaseModel):
 
 class Dataset(BaseModel):
     dataset_name: str
-    sub_collection_id: str | None = None
-    host: str | None = None
+    sub_collection_id: Optional[str] = None
+    host: Optional[str] = None
 
     class Config:
         schema_extra = {
