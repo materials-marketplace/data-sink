@@ -1,4 +1,4 @@
-# Data-sink app
+# Datasink app
 
 ## About
 The Datasink app offers users a persistent storage platform to securely store their data. It categorizes the uploaded data into two types: graph data and binary data, and stores them in separate databases. The graph data is stored as triples in the datastore, allowing users to perform SPARQL queries and extract relevant information from the graph data. Datasink supports standard Object storage endpoints for convenient data storage and retrieval. Additionally, it provides DCAT metadata representation in the form of Catalogs and Datasets for the stored data.
